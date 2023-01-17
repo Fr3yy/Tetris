@@ -163,9 +163,9 @@ while not done:
             game.go_down()
 
     for event in pygame.event.get():
-         if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT:
             done = True
-         if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 game.rotate()
             if event.key == pygame.K_DOWN:
@@ -179,14 +179,13 @@ while not done:
             if event.key == pygame.K_p:
                 if game.state == "pause":
                     game.state = "start";
-                else:
-                    game.state = "pause";
+                else: game.state = "pause";
             if event.key == pygame.K_ESCAPE:
                 game.__init__(20, 10)
 
     if event.type == pygame.KEYUP:
-        if event.key == pygame.K_DOWN:
-            pressing_down = False
+            if event.key == pygame.K_DOWN:
+                pressing_down = False
 
     screen.fill(WHITE)
 
@@ -212,11 +211,16 @@ while not done:
     text = font.render("Score: " + str(game.score), True, BLACK)
     text_game_over = font1.render("Game Over", True, (255, 125, 0))
     text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
+    text_pause = font1.render("Game Paused", True, (255, 125, 0))
+    text_pause1 = font1.render("Press P", True, (255, 215, 0))
 
     screen.blit(text, [0, 0])
     if game.state == "gameover":
         screen.blit(text_game_over, [20, 200])
         screen.blit(text_game_over1, [25, 265])
+    if game.state == "pause":
+        screen.blit(text_pause, [20, 200])
+        screen.blit(text_pause1, [25, 265])
 
     pygame.display.flip()
     clock.tick(fps)
