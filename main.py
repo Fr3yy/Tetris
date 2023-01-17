@@ -162,6 +162,12 @@ while not done:
     for event in pygame.event.get():
          if event.type == pygame.QUIT:
             done = True
+         if event.type == pygame.KEYDOWN:
+             if event.key == pygame.K_p:
+                 if game.state == "pause":
+                    game.state = "start";
+                 else:
+                    game.state = "pause";
 
     screen.fill(WHITE)
 
