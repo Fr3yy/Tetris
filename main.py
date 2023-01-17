@@ -162,6 +162,28 @@ while not done:
     for event in pygame.event.get():
          if event.type == pygame.QUIT:
             done = True
+         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                game.rotate()
+            if event.key == pygame.K_DOWN:
+                pressing_down = True
+            if event.key == pygame.K_LEFT:
+                game.go_side(-1)
+            if event.key == pygame.K_RIGHT:
+                game.go_side(1)
+            if event.key == pygame.K_SPACE:
+                game.go_space()
+            if event.key == pygame.K_p:
+                if game.state == "pause":
+                    game.state = "start";
+                else:
+                    game.state = "pause";
+            if event.key == pygame.K_ESCAPE:
+                game.__init__(20, 10)
+
+    if event.type == pygame.KEYUP:
+        if event.key == pygame.K_DOWN:
+            pressing_down = False
 
     screen.fill(WHITE)
 
