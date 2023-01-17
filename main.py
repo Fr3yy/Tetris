@@ -43,6 +43,7 @@ class Figure:
 
 class Tetris:
     level = 2
+    score = 0
     state = "start"
     field = []
     height = 0
@@ -56,6 +57,7 @@ class Tetris:
         self.height = height
         self.width = width
         self.field = []
+        self.score = 0
         self.state = "start"
         for i in range(height):
             new_line = []
@@ -90,6 +92,7 @@ class Tetris:
                 for i1 in range(i, 1, -1):
                     for j in range(self.width):
                         self.field[i1][j] = self.field[i1 - 1][j]
+        self.score += lines ** 2
 
     def go_space(self):
         while not self.intersects():
@@ -184,9 +187,11 @@ while not done:
 
     font = pygame.font.SysFont('Calibri', 25, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
+    text = font.render("Score: " + str(game.score), True, BLACK)
     text_game_over = font1.render("Game Over", True, (255, 125, 0))
     text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
 
+    screen.blit(text, [0, 0])
     if game.state == "gameover":
         screen.blit(text_game_over, [20, 200])
         screen.blit(text_game_over1, [25, 265])
